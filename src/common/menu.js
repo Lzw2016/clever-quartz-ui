@@ -15,9 +15,14 @@ const menuData = [
     path: 'demo/:list',
   },
   {
-    name: 'HTTP任务',
+    name: 'Http调度任务',
     icon: 'HTTP',
     path: 'http_job/:list',
+  },
+  {
+    name: 'Dubbo调度任务',
+    icon: 'dubbo',
+    path: 'dubbo_job/:list',
   },
   {
     name: '所有调度任务',
@@ -31,12 +36,12 @@ const menuData = [
   },
   {
     name: '调度任务日志',
-    icon: 'executionrecord',
+    icon: 'renwu',
     path: 'job_log/:list',
   },
   {
     name: '触发器日志',
-    icon: 'lishijilu',
+    icon: 'rizhi',
     path: 'trigger_log/:list',
   },
   {
@@ -45,9 +50,9 @@ const menuData = [
     path: 'scheduler_log/:list',
   },
   // {
-  //   name: '系统告警',
-  //   icon: 'chufayujing',
-  //   path: 'scheduler_log/:list',
+  //   name: '调度任务故障',
+  //   icon: 'yichang2',
+  //   path: 'error_log/:list',
   // },
 ];
 
