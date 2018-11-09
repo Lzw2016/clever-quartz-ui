@@ -51,6 +51,7 @@ module.exports = {
     'no-underscore-dangle': [0],
     'no-plusplus': [0],
     'prefer-destructuring': [0],
+    'react/sort-comp': [0],
     'comma-dangle': [
       'error',
       {

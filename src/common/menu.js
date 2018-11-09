@@ -10,53 +10,9 @@ const menuData = [
   // authority: 'admin',
   // },
   {
-    name: '系统设置',
-    icon: 'set',
-    path: '01',
-    children: [
-      {
-        name: '用户管理',
-        icon: 'yonghuguanli',
-        path: '02',
-      },
-      {
-        name: '角色管理',
-        icon: 'jiaoseguanli',
-        path: '03',
-      },
-      {
-        name: '系统参数',
-        icon: 'xitongcanshu1',
-        path: '04',
-      },
-      {
-        name: '系统字典',
-        icon: 'xitongzidian',
-        path: '05',
-      },
-    ],
-  },
-  {
-    name: '系统演示',
-    icon: 'xitongcanshu',
-    path: 'demo',
-    // hideInBreadcrumb: true,
-    // hideInMenu: true,
-    // authority: 'admin',
-    children: [
-      {
-        name: '复杂表格',
-        path: '01',
-      },
-      {
-        name: '富文本控件',
-        path: '02',
-      },
-      {
-        name: '其他控件',
-        path: '03',
-      },
-    ],
+    name: 'demo',
+    icon: 'yonghuguanli',
+    path: 'demo/:list',
   },
 ];
 

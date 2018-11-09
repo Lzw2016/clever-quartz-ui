@@ -29,11 +29,13 @@ export default {
   disableDynamicImport: true,
   publicPath: '/',
   hash: true,
-  // proxy: {
-  //   '/api': {
-  //     target: 'http://localhost:28080/',
-  //     changeOrigin: true,
-  //     pathRewrite: { '^/api': '/api' },
-  //   },
-  // },
+  // outputPath -  设置打包路径
+  // outputPath: 'C:/Users/lzw/Desktop/jztSource/yvan-periscope/yvan-periscope/src/main/resources/static',
+  proxy: {
+    '/api': {
+      target: 'http://127.0.0.1:28080/',
+      changeOrigin: true,
+      pathRewrite: { '^/api': '/api' },
+    },
+  },
 };

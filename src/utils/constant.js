@@ -24,7 +24,7 @@ const SystemInfo = {
     { key: 'privacy', title: '隐私', href: '', blankTarget: true },
     { key: 'terms', title: '条款', href: '', blankTarget: true },
   ],
-  hiddenFooter: true,
+  hiddenFooter: false,
 };
 
 // Layout 配置
@@ -71,4 +71,12 @@ const ModelInitState = {
   },
 };
 
-export { LocaleLanguage, SystemInfo, LayoutConfig, CodeMessage, ModelInitState };
+// 加密解密配置
+const CryptoConfig = {
+  AES: {
+    key: '636c657665722d73656375726974792d',
+    iv: 'f0021ea5a06d5a7bade961afe47e9ad9',
+  },
+};
+
+export { LocaleLanguage, SystemInfo, LayoutConfig, CodeMessage, ModelInitState, CryptoConfig };

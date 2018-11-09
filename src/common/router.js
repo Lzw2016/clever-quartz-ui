@@ -75,18 +75,11 @@ export const getRouterData = app => {
       component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
     },
 
-    '/dashboard': {
-      component: dynamicWrapper(app, ['demo'], () => import('../routes/Dashboard/index')),
+    '/demo/list': {
+      component: dynamicWrapper(app, [], () => import('../routes/Dashboard/demo')),
     },
-
-    '/demo/01': {
-      component: dynamicWrapper(app, ['demo'], () => import('../routes/Demo/Demo01')),
-    },
-    '/demo/02': {
-      component: dynamicWrapper(app, ['demo'], () => import('../routes/Demo/Demo02')),
-    },
-    '/demo/03': {
-      component: dynamicWrapper(app, ['demo'], () => import('../routes/Demo/Demo03')),
+    '/demo/:list': {
+      component: dynamicWrapper(app, [], () => import('../routes/Dashboard/demo')),
     },
 
     // '/aaa/bbb': {

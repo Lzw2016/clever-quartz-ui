@@ -36,7 +36,7 @@ const messages = defineMessages({
 
 @connect(({ global, loading }) => ({
   global,
-  quetyLoading: loading.effects['global/queryPage'],
+  queryLoading: loading.effects['global/queryPage'],
 }))
 export default class Dashboard extends PureComponent {
   state = {
