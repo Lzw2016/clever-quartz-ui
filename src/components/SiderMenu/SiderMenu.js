@@ -206,7 +206,7 @@ export default class SiderMenu extends PureComponent {
       openKeys: moreThanOne ? [lastOpenKey] : [...openKeys],
     });
   };
-
+  
   render() {
     const { logo, menuData, collapsed, onCollapse } = this.props;
     const { openKeys } = this.state;

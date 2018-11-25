@@ -33,7 +33,7 @@ export default {
   // outputPath: 'C:/Users/lzw/Desktop/jztSource/yvan-periscope/yvan-periscope/src/main/resources/static',
   proxy: {
     '/api': {
-      target: 'http://127.0.0.1:28080/',
+      target: 'http://127.0.0.1:28081/',
       changeOrigin: true,
       pathRewrite: { '^/api': '/api' },
     },

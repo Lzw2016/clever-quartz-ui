@@ -25,6 +25,7 @@ const SystemInfo = {
     { key: 'terms', title: '条款', href: '', blankTarget: true },
   ],
   hiddenFooter: false,
+  localStorageAuthorityKey: 'clever-quartz',
 };
 
 // Layout 配置
@@ -73,9 +74,13 @@ const ModelInitState = {
 
 // 加密解密配置
 const CryptoConfig = {
-  AES: {
+  ManageAES: {
     key: '636c657665722d73656375726974792d',
     iv: 'f0021ea5a06d5a7bade961afe47e9ad9',
+  },
+  LoginAES: {
+    key: '636c657665722d736563757288888888',
+    iv: '636c657665722d736563757266666666',
   },
 };
 
