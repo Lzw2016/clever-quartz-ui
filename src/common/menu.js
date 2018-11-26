@@ -10,11 +10,6 @@ const menuData = [
   // authority: 'admin',
   // },
   {
-    name: 'Demo',
-    icon: 'http1',
-    path: 'demo/:list',
-  },
-  {
     name: 'Http调度任务',
     icon: 'HTTP',
     path: 'http_job/:list',

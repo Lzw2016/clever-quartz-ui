@@ -1,10 +1,12 @@
 // import { stringify } from 'qs';
 import request from '../utils/request';
-import { LoginEncrypt } from '../utils/crypto'
+// import { LoginEncrypt } from '../utils/crypto'
 
 // 用户登录 type,
 export async function accountLogin({ userName, password, autoLogin }) {
-  return request('/login.json', { method: 'POST', body: { loginType: "username", username: userName, password: LoginEncrypt(password), "remember-me": autoLogin } });
+  // TODO 用户登录修改
+  return { success: true, message: '...', timestamp: 1541944461942, "user": { username: 'lizw', telephone: '', email: '', userType: '', authorities: [], roleNames: [] } };
+  // return request('/login.json', { method: 'POST', body: { loginType: "username", username: userName, password: LoginEncrypt(password), "remember-me": autoLogin } });
 }
 
 // 用户登出
@@ -14,7 +16,8 @@ export async function accountLogout() {
 
 // 模拟查询当前用户信息
 export async function queryCurrent() {
-  return request('/login/user_info.json');
+  return { username: 'lizw', telephone: '', email: '', userType: '', authorities: [], roleNames: [] };
+  // return request('/login/user_info.json');
 }
 
 // 模拟查询通知消息

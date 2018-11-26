@@ -74,21 +74,38 @@ export const getRouterData = app => {
     '/': {
       component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
     },
-
-    '/demo/list': {
-      component: dynamicWrapper(app, [], () => import('../routes/Dashboard/demo')),
-    },
-    '/demo/:list': {
-      component: dynamicWrapper(app, [], () => import('../routes/Dashboard/demo')),
-    },
-
     // '/aaa/bbb': {
     //   component: dynamicWrapper(app, ['project', 'activities', 'chart'], () => import('../routes/Dashboard/Workplace')),
     //   // hideInBreadcrumb: true,
     //   // name: '工作台',
     //   // authority: 'admin',
     // },
-
+    // 功能页面
+    '/http_job/list': {
+      component: dynamicWrapper(app, ['HttpJobModel'], () => import('../routes/Quartz/HttpJob')),
+    },
+    '/http_job/:list': {
+      component: dynamicWrapper(app, ['HttpJobModel'], () => import('../routes/Quartz/HttpJob')),
+    },
+    '/dubbo_job/:list': {
+      component: dynamicWrapper(app, ['DubboJobModel'], () => import('../routes/Quartz/DubboJob')),
+    },
+    '/all_job/:list': {
+      component: dynamicWrapper(app, ['AllJobModel'], () => import('../routes/Quartz/AllJob')),
+    },
+    '/all_trigger/:list': {
+      component: dynamicWrapper(app, ['AllTriggerModel'], () => import('../routes/Quartz/AllTrigger')),
+    },
+    '/job_log/:list': {
+      component: dynamicWrapper(app, ['JobLogModel'], () => import('../routes/Quartz/JobLog')),
+    },
+    '/trigger_log/:list': {
+      component: dynamicWrapper(app, ['TriggerLogModel'], () => import('../routes/Quartz/TriggerLog')),
+    },
+    '/scheduler_log/:list': {
+      component: dynamicWrapper(app, ['SchedulerLogModel'], () => import('../routes/Quartz/SchedulerLog')),
+    },
+    // 错误页面
     '/exception/403': {
       component: dynamicWrapper(app, [], () => import('../routes/Exception/403')),
     },
