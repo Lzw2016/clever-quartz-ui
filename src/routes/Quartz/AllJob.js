@@ -69,9 +69,9 @@ export default class AllJob extends PureComponent {
               </Select>
             )}
           </Form.Item>
-          <Form.Item label="任务类型" style={{ width: 450 }}>
+          <Form.Item label="任务类型">
             {getFieldDecorator('jobClassName', { initialValue: queryParam.jobClassName })(
-              <Select placeholder="任务类型" allowClear={true} style={{ width: 360 }}>
+              <Select placeholder="任务类型" allowClear={true}>
                 {jobClassNameList.map(name => (<Select.Option key={name} value={name}>{name}</Select.Option>))}
               </Select>
             )}

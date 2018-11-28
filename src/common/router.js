@@ -94,10 +94,10 @@ export const getRouterData = app => {
       component: dynamicWrapper(app, ['GlobalEnumModel', 'AllJobModel'], () => import('../routes/Quartz/AllJob')),
     },
     '/all_trigger/:list': {
-      component: dynamicWrapper(app, ['AllTriggerModel'], () => import('../routes/Quartz/AllTrigger')),
+      component: dynamicWrapper(app, ['GlobalEnumModel', 'AllTriggerModel'], () => import('../routes/Quartz/AllTrigger')),
     },
     '/job_log/:list': {
-      component: dynamicWrapper(app, ['JobLogModel'], () => import('../routes/Quartz/JobLog')),
+      component: dynamicWrapper(app, ['GlobalEnumModel', 'JobLogModel'], () => import('../routes/Quartz/JobLog')),
     },
     '/trigger_log/:list': {
       component: dynamicWrapper(app, ['TriggerLogModel'], () => import('../routes/Quartz/TriggerLog')),

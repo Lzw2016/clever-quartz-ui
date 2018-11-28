@@ -1,6 +1,11 @@
 // import { stringify } from 'qs';
 import request from '../utils/request';
 
+// 获取所有调度器
+export async function allScheduler() {
+  return request('/api/quartz/scheduler.json', { method: 'GET' });
+}
+
 // 获取SchedulerContext
 export async function getContext() {
   return request('/api/quartz/scheduler/context.json', { method: 'GET' });

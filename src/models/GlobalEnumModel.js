@@ -1,13 +1,15 @@
 // import lodash from 'lodash';
 import { getJobGroupNames, getAllJobClassName } from '../services/quartz-job-detail-controller';
+import { allScheduler } from '../services/quartz-scheduler-controller';
 
 export default {
   namespace: 'GlobalEnumModel',
 
   state: {
-    jobClassNameList: [], // 获取所有的Job类型
+    schedulerList: [],    // 所有调度器
+    jobClassNameList: [], // 所有的Job类型
     jobGroupList: [],     // 所有的Job Group Name
-    // roleNameList: [], // 所有的角色名称
+    // roleNameList: [],  // 所有的角色名称
   },
 
   effects: {
@@ -22,6 +24,12 @@ export default {
       const jobGroupList = yield call(getJobGroupNames);
       if (!jobGroupList) return;
       yield put({ type: 'save', payload: { jobGroupList } });
+    },
+    *allScheduler(_, { call, put }) {
+      // 请求数据
+      const schedulerList = yield call(allScheduler);
+      if (!schedulerList) return;
+      yield put({ type: 'save', payload: { schedulerList } });
     },
   },
 
