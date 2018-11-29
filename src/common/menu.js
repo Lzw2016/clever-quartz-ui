@@ -14,11 +14,11 @@ const menuData = [
     icon: 'HTTP',
     path: 'http_job/:list',
   },
-  {
-    name: 'Dubbo调度任务',
-    icon: 'dubbo',
-    path: 'dubbo_job/:list',
-  },
+  // {
+  //   name: 'Dubbo调度任务',
+  //   icon: 'dubbo',
+  //   path: 'dubbo_job/:list',
+  // },
   {
     name: '调度器集群',
     icon: 'jiqun1',

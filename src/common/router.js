@@ -82,10 +82,10 @@ export const getRouterData = app => {
     // },
     // 功能页面
     '/http_job/list': {
-      component: dynamicWrapper(app, ['HttpJobModel'], () => import('../routes/Quartz/HttpJob')),
+      component: dynamicWrapper(app, ['GlobalEnumModel', 'HttpJobModel'], () => import('../routes/Quartz/HttpJob')),
     },
     '/http_job/:list': {
-      component: dynamicWrapper(app, ['HttpJobModel'], () => import('../routes/Quartz/HttpJob')),
+      component: dynamicWrapper(app, ['GlobalEnumModel', 'HttpJobModel'], () => import('../routes/Quartz/HttpJob')),
     },
     '/dubbo_job/:list': {
       component: dynamicWrapper(app, ['DubboJobModel'], () => import('../routes/Quartz/DubboJob')),
