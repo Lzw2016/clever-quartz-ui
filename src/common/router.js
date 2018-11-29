@@ -100,7 +100,7 @@ export const getRouterData = app => {
       component: dynamicWrapper(app, ['GlobalEnumModel', 'JobLogModel'], () => import('../routes/Quartz/JobLog')),
     },
     '/trigger_log/:list': {
-      component: dynamicWrapper(app, ['TriggerLogModel'], () => import('../routes/Quartz/TriggerLog')),
+      component: dynamicWrapper(app, ['GlobalEnumModel', 'TriggerLogModel'], () => import('../routes/Quartz/TriggerLog')),
     },
     '/scheduler/:list': {
       component: dynamicWrapper(app, ['SchedulerModel'], () => import('../routes/Quartz/Scheduler')),
