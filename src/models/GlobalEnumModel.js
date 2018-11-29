@@ -1,5 +1,6 @@
 // import lodash from 'lodash';
 import { getJobGroupNames, getAllJobClassName } from '../services/quartz-job-detail-controller';
+import { getTriggerGroupNames } from '../services/quartz-trigger-controller';
 import { allScheduler } from '../services/quartz-scheduler-controller';
 
 export default {
@@ -9,6 +10,7 @@ export default {
     schedulerList: [],    // 所有调度器
     jobClassNameList: [], // 所有的Job类型
     jobGroupList: [],     // 所有的Job Group Name
+    triggerGroupList: [], // 所有触发器组 Group Name
     // roleNameList: [],  // 所有的角色名称
   },
 
@@ -30,6 +32,12 @@ export default {
       const schedulerList = yield call(allScheduler);
       if (!schedulerList) return;
       yield put({ type: 'save', payload: { schedulerList } });
+    },
+    *getTriggerGroupNames(_, { call, put }) {
+      // 请求数据
+      const triggerGroupList = yield call(getTriggerGroupNames);
+      if (!triggerGroupList) return;
+      yield put({ type: 'save', payload: { triggerGroupList } });
     },
   },
 

@@ -96,7 +96,6 @@ export default class JobLog extends PureComponent {
               </Select>
             )}
           </Form.Item>
-
         </Row>
         <Row gutter={{ md: 0, lg: 0, xl: 0 }}>
           <Form.Item label="执行时间">

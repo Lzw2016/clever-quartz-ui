@@ -17,6 +17,11 @@ export async function addSimpleTriggerForJob(addSimpleTriggerForJobReq) {
 }
 
 // 获取所有的CalendarName
+export async function findTriggers(findTriggersReq) {
+  return request(`/api/quartz/trigger.json?${stringify(findTriggersReq)}`, { method: 'GET' });
+}
+
+// 获取所有的CalendarName
 export async function getCalendarNames() {
   return request('/api/quartz/trigger/all_calendar_names.json', { method: 'GET' });
 }
