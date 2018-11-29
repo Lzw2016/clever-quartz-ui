@@ -20,8 +20,13 @@ const menuData = [
     path: 'dubbo_job/:list',
   },
   {
-    name: '所有调度任务',
-    icon: 'tasks',
+    name: '调度器集群',
+    icon: 'jiqun1',
+    path: 'scheduler/:list',
+  },
+  {
+    name: '所有任务',
+    icon: 'jineng_icon-',
     path: 'all_job/:list',
   },
   {

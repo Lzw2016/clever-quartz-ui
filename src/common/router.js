@@ -102,6 +102,9 @@ export const getRouterData = app => {
     '/trigger_log/:list': {
       component: dynamicWrapper(app, ['TriggerLogModel'], () => import('../routes/Quartz/TriggerLog')),
     },
+    '/scheduler/:list': {
+      component: dynamicWrapper(app, ['SchedulerModel'], () => import('../routes/Quartz/Scheduler')),
+    },
     '/scheduler_log/:list': {
       component: dynamicWrapper(app, ['SchedulerLogModel'], () => import('../routes/Quartz/SchedulerLog')),
     },
