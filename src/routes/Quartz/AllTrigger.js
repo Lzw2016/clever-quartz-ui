@@ -12,7 +12,7 @@ import styles from './AllTrigger.less';
 @connect(({ GlobalEnumModel, AllTriggerModel, loading }) => ({
   GlobalEnumModel,
   AllTriggerModel,
-  queryLoading: loading.effects['global/findByPage'],
+  queryLoading: loading.effects['AllTriggerModel/findByPage'],
 }))
 @Form.create()
 export default class AllTrigger extends PureComponent {

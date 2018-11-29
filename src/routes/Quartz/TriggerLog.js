@@ -62,7 +62,7 @@ export default class TriggerLog extends PureComponent {
       form: { getFieldDecorator },
       queryLoading,
       GlobalEnumModel: { schedulerList, jobGroupList, jobClassNameList },
-      TriggerLogModel: { queryParam, jobKeyNameList },
+      TriggerLogModel: { queryParam, triggerKeyNameList },
     } = this.props;
     return (
       <Form onSubmit={this.findByPage} layout="inline" className={styles.queryForm}>
@@ -74,17 +74,17 @@ export default class TriggerLog extends PureComponent {
               </Select>
             )}
           </Form.Item>
-          <Form.Item label="任务组名">
-            {getFieldDecorator('jobGroup', { initialValue: queryParam.jobGroup })(
-              <Select placeholder="任务组名" allowClear={true} onChange={jobGroup => dispatch({ type: 'TriggerLogModel/getJobKeyByGroup', payload: { jobGroup } })}>
+          <Form.Item label="触发器组">
+            {getFieldDecorator('triggerGroup', { initialValue: queryParam.triggerGroup })(
+              <Select placeholder="触发器组" allowClear={true} onChange={triggerGroup => dispatch({ type: 'TriggerLogModel/getTriggerKeyByGroup', payload: { triggerGroup } })}>
                 {jobGroupList.map(name => (<Select.Option key={name} value={name}>{name}</Select.Option>))}
               </Select>
             )}
           </Form.Item>
-          <Form.Item label="任务名称">
-            {getFieldDecorator('jobName', { initialValue: queryParam.jobName })(
-              <Select placeholder="任务名称" allowClear={true}>
-                {jobKeyNameList.map(item => (<Select.Option key={item.jobName} value={item.jobName}>{item.jobName}</Select.Option>))}
+          <Form.Item label="触发器名">
+            {getFieldDecorator('triggerName', { initialValue: queryParam.triggerName })(
+              <Select placeholder="触发器名" allowClear={true}>
+                {triggerKeyNameList.map(item => (<Select.Option key={item.triggerName} value={item.triggerName}>{item.triggerName}</Select.Option>))}
               </Select>
             )}
           </Form.Item>
@@ -107,14 +107,14 @@ export default class TriggerLog extends PureComponent {
               <DatePicker placeholder="执行结束-结束" style={{ width: 174 }} />
             )}
           </Form.Item>
-          <Form.Item label="执行耗时(ms)">
+          <Form.Item label="触发耗时(ms)">
             {getFieldDecorator('processTimeByMin', { initialValue: queryParam.processTimeByMin })(
-              <Input placeholder="执行耗时-最小值" />
+              <Input placeholder="触发耗时-最小值" />
             )}
           </Form.Item>
-          <Form.Item label="执行耗时(ms)">
+          <Form.Item label="触发耗时(ms)">
             {getFieldDecorator('processTimeByMax', { initialValue: queryParam.processTimeByMax })(
-              <Input placeholder="执行耗时-最大值" />
+              <Input placeholder="触发耗时-最大值" />
             )}
           </Form.Item>
           <Form.Item className={styles.formItemButton}>

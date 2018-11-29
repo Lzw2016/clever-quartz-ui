@@ -90,6 +90,9 @@ export const getRouterData = app => {
     '/dubbo_job/:list': {
       component: dynamicWrapper(app, ['DubboJobModel'], () => import('../routes/Quartz/DubboJob')),
     },
+    '/scheduler/:list': {
+      component: dynamicWrapper(app, ['SchedulerModel'], () => import('../routes/Quartz/Scheduler')),
+    },
     '/all_job/:list': {
       component: dynamicWrapper(app, ['GlobalEnumModel', 'AllJobModel'], () => import('../routes/Quartz/AllJob')),
     },
@@ -102,11 +105,8 @@ export const getRouterData = app => {
     '/trigger_log/:list': {
       component: dynamicWrapper(app, ['GlobalEnumModel', 'TriggerLogModel'], () => import('../routes/Quartz/TriggerLog')),
     },
-    '/scheduler/:list': {
-      component: dynamicWrapper(app, ['SchedulerModel'], () => import('../routes/Quartz/Scheduler')),
-    },
     '/scheduler_log/:list': {
-      component: dynamicWrapper(app, ['SchedulerLogModel'], () => import('../routes/Quartz/SchedulerLog')),
+      component: dynamicWrapper(app, ['GlobalEnumModel', 'SchedulerLogModel'], () => import('../routes/Quartz/SchedulerLog')),
     },
     // 错误页面
     '/exception/403': {

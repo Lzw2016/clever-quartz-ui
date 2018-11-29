@@ -1,6 +1,7 @@
 // import lodash from 'lodash';
 import { ModelInitState } from '../utils/constant';
 import { getJobKeyByGroup } from '../services/quartz-job-detail-controller';
+import { getTriggerKeyByGroup } from '../services/quartz-trigger-controller';
 import { findTriggerLogByPage } from '../services/log-controller';
 
 export default {
@@ -27,6 +28,7 @@ export default {
     data: [],
 
     jobKeyNameList: [],
+    triggerKeyNameList: [],
   },
 
   effects: {
@@ -39,6 +41,16 @@ export default {
       }
       if (!jobKeyNameList) return;
       yield put({ type: 'save', payload: { jobKeyNameList } });
+    },
+    *getTriggerKeyByGroup({ payload }, { call, put }) {
+      const { triggerGroup } = payload;
+      let triggerKeyNameList = [];
+      if (triggerGroup) {
+        // 请求数据
+        triggerKeyNameList = yield call(getTriggerKeyByGroup, triggerGroup);
+      }
+      if (!triggerKeyNameList) return;
+      yield put({ type: 'save', payload: { triggerKeyNameList } });
     },
     *findByPage({ payload }, { select, call, put }) {
       let queryParam = yield select(state => state.TriggerLogModel.queryParam);
