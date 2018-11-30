@@ -90,6 +90,13 @@ export default class HttpJob extends PureComponent {
       // { title: '', dataIndex: 'isNonconcurrent' },
       // { title: '', dataIndex: 'isUpdateData' },
       {
+        title: '请求地址', dataIndex: 'jobData', render: val => {
+          if (!val || !val.HttpJobConfig) return '-';
+          const { HttpJobConfig: httpJobConfig } = val
+          return `[${httpJobConfig.method}] ${httpJobConfig.url}`;
+        },
+      },
+      {
         title: 'Cron表达式', dataIndex: 'triggersResList', render: val => {
           if (!val || val.length <= 0) return '-';
           return val[0].cronExpression;
