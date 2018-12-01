@@ -1,11 +1,11 @@
 import React, { PureComponent, Fragment } from 'react';
-import { Card, Form, Row, Select, Button, Table } from 'antd';
+import { Card, Form, Row, Select, Button, Table, Tag, Icon, Badge, Divider } from 'antd';
 import { connect } from 'dva';
 // import moment from 'moment';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 // import { LocaleLanguage, SystemInfo } from '../../utils/constant';
-// import { changeLocale } from '../../utils/utils';
-import { SorterOrderMapper } from '../../utils/enum';
+import { fmtDateTime } from '../../utils/fmt';
+import { SorterOrderMapper, HttpMethodMapper, TriggerStateMapper } from '../../utils/enum';
 // import classNames from 'classnames';
 import styles from './HttpJob.less';
 
@@ -70,20 +70,41 @@ export default class HttpJob extends PureComponent {
           </Form.Item>
           <Form.Item className={styles.formItemButton}>
             <Button type="primary" htmlType="submit" disabled={queryLoading}>查询</Button>
+            <span className={styles.spanWidth16} />
+            <Button>新增</Button>
           </Form.Item>
         </Row>
       </Form>
     );
   }
 
+  // 获得触发器
+  getTrigger = (triggersResList) => {
+    if (!triggersResList) return undefined;
+    let trigger;
+    triggersResList.forEach(item => {
+      if (item.triggerType === 'CRON') {
+        if (!trigger || trigger.nextFireTime > item.nextFireTime) {
+          trigger = item;
+        }
+      }
+    });
+    return trigger;
+  }
+
+  getHttpJobConfig = (jobData) => {
+    if (!jobData || !jobData.HttpJobConfig) return undefined;
+    return jobData.HttpJobConfig;
+  }
+
   // 数据表格
   getTable() {
     const { HttpJobModel, queryLoading } = this.props;
     const columns = [
-      { title: '调度器名称', dataIndex: 'schedName' },
+      // { title: '调度器名称', dataIndex: 'schedName' },
       { title: '任务组名', dataIndex: 'jobGroup' },
       { title: '任务名称', dataIndex: 'jobName' },
-      { title: '任务类型', dataIndex: 'jobClassName' },
+      // { title: '任务类型', dataIndex: 'jobClassName' },
       // { title: '', dataIndex: 'requestsRecovery' },
       // { title: '', dataIndex: 'description' },
       // { title: '', dataIndex: 'isDurable' },
@@ -91,24 +112,88 @@ export default class HttpJob extends PureComponent {
       // { title: '', dataIndex: 'isUpdateData' },
       {
         title: '请求地址', dataIndex: 'jobData', render: val => {
-          if (!val || !val.HttpJobConfig) return '-';
-          const { HttpJobConfig: httpJobConfig } = val
-          return `[${httpJobConfig.method}] ${httpJobConfig.url}`;
+          const httpJobConfig = this.getHttpJobConfig(val);
+          if (!httpJobConfig) return '-';
+          let color = HttpMethodMapper[`${httpJobConfig.method}`];
+          if (!color) color = HttpMethodMapper.error;
+          return (
+            <Fragment>
+              <Tag color={color.background} style={{ cursor: 'auto' }}>{httpJobConfig.method}</Tag>
+              <Tag color="blue" style={{ cursor: 'auto' }}>{httpJobConfig.url}</Tag>
+            </Fragment>
+          );
+        },
+      },
+      {
+        title: '任务状态', dataIndex: 'triggersResList', key: "triggerState", render: val => {
+          const trigger = this.getTrigger(val);
+          if (!trigger) return '-';
+          let triggerState = TriggerStateMapper[`${trigger.triggerState}`];
+          if (!triggerState) triggerState = TriggerStateMapper.ERROR;
+          return <Badge status={triggerState.status} text={triggerState.label} />;
+          // <span style={{ color: triggerState.color }}>{triggerState.label}</span>;
         },
       },
       {
         title: 'Cron表达式', dataIndex: 'triggersResList', render: val => {
-          if (!val || val.length <= 0) return '-';
-          return val[0].cronExpression;
+          const trigger = this.getTrigger(val);
+          if (!trigger) return '-';
+          return (
+            <Fragment>
+              <span style={{ color: '#1890ff' }}>{trigger.cronExpression}</span>
+              <Icon type="info-circle" theme="twoTone" style={{ marginLeft: 16, cursor: 'pointer' }} title="查看触发时间" />
+            </Fragment>
+          );
         },
       },
-      // { title: '上次执行时间', dataIndex: 'prevFireTime' },
-      // { title: '下次执行时间', dataIndex: 'nextFireTime' },
+      {
+        title: '时区', dataIndex: 'triggersResList', key: "timeZoneId", render: val => {
+          const trigger = this.getTrigger(val);
+          if (!trigger) return '-';
+          return trigger.timeZoneId;
+        },
+      },
+      {
+        title: '上次执行时间', dataIndex: 'triggersResList', key: "prevFireTime", render: val => {
+          const trigger = this.getTrigger(val);
+          if (!trigger) return '-';
+          return fmtDateTime(trigger.prevFireTime);
+        },
+      },
+      {
+        title: '下次执行时间', dataIndex: 'triggersResList', key: "nextFireTime", render: val => {
+          const trigger = this.getTrigger(val);
+          if (!trigger) return '-';
+          return fmtDateTime(trigger.nextFireTime);
+        },
+      },
+      {
+        title: '开始时间', dataIndex: 'triggersResList', key: "startTime", render: val => {
+          const trigger = this.getTrigger(val);
+          if (!trigger) return '-';
+          return fmtDateTime(trigger.startTime);
+        },
+      },
+      {
+        title: '结束时间', dataIndex: 'triggersResList', key: "endTime", render: val => {
+          const trigger = this.getTrigger(val);
+          if (!trigger || trigger.endTime <= 0) return '-';
+          return fmtDateTime(trigger.endTime);
+        },
+      },
       {
         title: '操作', align: 'center', key: 'action',
         render: () => (
           <Fragment>
-            <a>删除</a>
+            <a>暂停</a>
+            <Divider type="vertical" />
+            <a>继续</a>
+            <Divider type="vertical" />
+            <a>立即执行</a>
+            <Divider type="vertical" />
+            <a>编辑</a>
+            <Divider type="vertical" />
+            <a style={{ color: '#f5222d' }}>删除</a>
           </Fragment>
         ),
       },
