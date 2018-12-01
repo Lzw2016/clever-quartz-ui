@@ -1,7 +1,7 @@
 // import lodash from 'lodash';
 import { ModelInitState } from '../utils/constant';
 import { queryJobAndTrigger } from '../services/query-controller';
-import { getJobKeyByGroup } from '../services/quartz-job-detail-controller';
+import { getJobKeyByGroup, pauseJob, resumeJob, triggerJob, deleteJobDetail } from '../services/quartz-job-detail-controller';
 
 export default {
   namespace: 'HttpJobModel',
@@ -44,6 +44,46 @@ export default {
       // 保存数据
       pagination = { ...pagination, pageSize: size, current, total };
       yield put({ type: 'save', payload: { data: records, queryParam, pagination } });
+    },
+    *pauseJob({ payload, successCallBack }, { call, put }) {
+      // 请求数据
+      const resultData = yield call(pauseJob, payload);
+      if (!resultData) return;
+      yield put({ type: 'findByPage' });
+      // 回调
+      if (successCallBack instanceof Function) {
+        successCallBack(resultData);
+      }
+    },
+    *resumeJob({ payload, successCallBack }, { call, put }) {
+      // 请求数据
+      const resultData = yield call(resumeJob, payload);
+      if (!resultData) return;
+      yield put({ type: 'findByPage' });
+      // 回调
+      if (successCallBack instanceof Function) {
+        successCallBack(resultData);
+      }
+    },
+    *triggerJob({ payload, successCallBack }, { call, put }) {
+      // 请求数据
+      const resultData = yield call(triggerJob, payload);
+      if (!resultData) return;
+      yield put({ type: 'findByPage' });
+      // 回调
+      if (successCallBack instanceof Function) {
+        successCallBack(resultData);
+      }
+    },
+    *deleteJobDetail({ payload, successCallBack }, { call, put }) {
+      // 请求数据
+      const resultData = yield call(deleteJobDetail, payload);
+      if (!resultData) return;
+      yield put({ type: 'findByPage' });
+      // 回调
+      if (successCallBack instanceof Function) {
+        successCallBack(resultData);
+      }
     },
   },
 

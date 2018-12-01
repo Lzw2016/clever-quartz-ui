@@ -1,7 +1,9 @@
 import React, { PureComponent, Fragment } from 'react';
-import { Card, Form, Row, Select, Button, Table, Tag, Icon, Badge, Divider } from 'antd';
+import { Card, Form, Row, Select, Button, Table, Tag, Icon, Badge, Divider, Popconfirm, message } from 'antd';
 import { connect } from 'dva';
+import { Link } from 'dva/router';
 // import moment from 'moment';
+import { stringify } from 'qs';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 // import { LocaleLanguage, SystemInfo } from '../../utils/constant';
 import { fmtDateTime } from '../../utils/fmt';
@@ -50,7 +52,7 @@ export default class HttpJob extends PureComponent {
 
   // 查询表单
   queryForm() {
-    const { dispatch, form: { getFieldDecorator }, queryLoading, GlobalEnumModel: { jobGroupList }, HttpJobModel: { queryParam, jobKeyNameList } } = this.props;
+    const { dispatch, history, form: { getFieldDecorator }, queryLoading, GlobalEnumModel: { jobGroupList }, HttpJobModel: { queryParam, jobKeyNameList } } = this.props;
     return (
       <Form onSubmit={this.findByPage} layout="inline" className={styles.queryForm}>
         <Row gutter={{ md: 0, lg: 0, xl: 0 }}>
@@ -71,7 +73,7 @@ export default class HttpJob extends PureComponent {
           <Form.Item className={styles.formItemButton}>
             <Button type="primary" htmlType="submit" disabled={queryLoading}>查询</Button>
             <span className={styles.spanWidth16} />
-            <Button>新增</Button>
+            <Button onClick={() => history.push({ pathname: 'http/add' })}>新增</Button>
           </Form.Item>
         </Row>
       </Form>
@@ -99,7 +101,7 @@ export default class HttpJob extends PureComponent {
 
   // 数据表格
   getTable() {
-    const { HttpJobModel, queryLoading } = this.props;
+    const { dispatch, HttpJobModel, queryLoading } = this.props;
     const columns = [
       // { title: '调度器名称', dataIndex: 'schedName' },
       { title: '任务组名', dataIndex: 'jobGroup' },
@@ -183,19 +185,75 @@ export default class HttpJob extends PureComponent {
       },
       {
         title: '操作', align: 'center', key: 'action',
-        render: () => (
-          <Fragment>
-            <a>暂停</a>
-            <Divider type="vertical" />
-            <a>继续</a>
-            <Divider type="vertical" />
-            <a>立即执行</a>
-            <Divider type="vertical" />
-            <a>编辑</a>
-            <Divider type="vertical" />
-            <a style={{ color: '#f5222d' }}>删除</a>
-          </Fragment>
-        ),
+        render: (_, { jobGroup, jobName }) => {
+          const style = { marginRight: 8 };
+          return (
+            <Fragment>
+              <Popconfirm
+                placement="leftTop"
+                title={`确认暂停任务[${jobGroup}-${jobName}]?`}
+                okText="暂停"
+                cancelText="取消"
+                onConfirm={() => {
+                  dispatch({
+                    type: 'HttpJobModel/pauseJob',
+                    payload: { jobGroup, jobName },
+                    successCallBack: resultData => message.success(`暂停任务[${resultData.jobGroup}-${resultData.jobName}]成功`),
+                  });
+                }}
+              >
+                <a style={style}>暂停</a>
+              </Popconfirm>
+              <Popconfirm
+                placement="leftTop"
+                title={`确认继续任务[${jobGroup}-${jobName}]?`}
+                okText="继续"
+                cancelText="取消"
+                onConfirm={() => {
+                  dispatch({
+                    type: 'HttpJobModel/resumeJob',
+                    payload: { jobGroup, jobName },
+                    successCallBack: resultData => message.success(`继续执行任务[${resultData.jobGroup}-${resultData.jobName}]成功`),
+                  });
+                }}
+              >
+                <a style={style}>继续</a>
+              </Popconfirm>
+              <Popconfirm
+                placement="leftTop"
+                title={`确认立即执行任务[${jobGroup}-${jobName}]?`}
+                okText="立即执行"
+                cancelText="取消"
+                onConfirm={() => {
+                  dispatch({
+                    type: 'HttpJobModel/triggerJob',
+                    payload: { jobGroup, jobName },
+                    successCallBack: resultData => message.success(`立即执行任务[${resultData.jobGroup}-${resultData.jobName}]成功`),
+                  });
+                }}
+              >
+                <a>立即执行</a>
+              </Popconfirm>
+              <Divider type="vertical" />
+              <Link style={style} to={{ pathname: 'http/edit', search: `?${stringify({ jobGroup, jobName })}` }}>编辑</Link>
+              <Popconfirm
+                placement="leftTop"
+                title={`确认删除任务[${jobGroup}-${jobName}]?`}
+                okText="删除"
+                cancelText="取消"
+                onConfirm={() => {
+                  dispatch({
+                    type: 'HttpJobModel/deleteJobDetail',
+                    payload: { jobGroup, jobName },
+                    successCallBack: resultData => message.success(`删除任务[${resultData.jobGroup}-${resultData.jobName}]成功`),
+                  });
+                }}
+              >
+                <a style={{ color: '#f5222d' }}>删除</a>
+              </Popconfirm>
+            </Fragment>
+          );
+        },
       },
     ];
     return (
