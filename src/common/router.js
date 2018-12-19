@@ -87,6 +87,14 @@ export const getRouterData = app => {
     '/http_job/:list': {
       component: dynamicWrapper(app, ['GlobalEnumModel', 'HttpJobModel'], () => import('../routes/Quartz/HttpJob')),
     },
+    '/http_job/http/add': {
+      component: dynamicWrapper(app, ['GlobalEnumModel', 'HttpJobAddModel'], () => import('../routes/Quartz/HttpJobAdd')),
+      name: '新增HTTP任务',
+    },
+    '/http_job/http/edit': {
+      component: dynamicWrapper(app, ['GlobalEnumModel', 'HttpJobEditModel'], () => import('../routes/Quartz/HttpJobEdit')),
+      name: '编辑HTTP任务',
+    },
     '/dubbo_job/:list': {
       component: dynamicWrapper(app, ['DubboJobModel'], () => import('../routes/Quartz/DubboJob')),
     },
