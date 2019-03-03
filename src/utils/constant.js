@@ -84,4 +84,7 @@ const CryptoConfig = {
   },
 };
 
-export { LocaleLanguage, SystemInfo, LayoutConfig, CodeMessage, ModelInitState, CryptoConfig };
+// 设置API前缀
+const ProxyPrefix = PROXY_PREFIX ? PROXY_PREFIX : ''; // eslint-disable-line
+
+export { LocaleLanguage, SystemInfo, LayoutConfig, CodeMessage, ModelInitState, CryptoConfig, ProxyPrefix };

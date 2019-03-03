@@ -1,6 +1,5 @@
-export const proxySvcs = {
-  file: 'file.svc',
-  auth: 'auth.oa.com',
-  'points-shop': 'localhost:9077',
+const ProxyMap = {
+  quartz: 'http://192.168.159.136:28082',
 };
 
+export { ProxyMap };

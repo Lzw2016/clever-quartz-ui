@@ -29,6 +29,9 @@ export default {
   disableDynamicImport: true,
   publicPath: '/',
   hash: true,
+  define: {
+    'PROXY_PREFIX': process.env.PROXY_PREFIX,
+  },
   // outputPath -  设置打包路径
   // outputPath: 'C:/Users/lzw/Desktop/jztSource/yvan-periscope/yvan-periscope/src/main/resources/static',
   proxy: {

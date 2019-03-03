@@ -1,6 +1,6 @@
 
 import httpProxy from 'http-proxy';
-import { proxyMap } from './proxy.map';
+import { ProxyMap } from './proxy.map';
 
 const proxy = httpProxy.createProxyServer({
   ignorePath: true,
@@ -8,7 +8,7 @@ const proxy = httpProxy.createProxyServer({
 
 function getProxyUrl(originalUrl) {
   const key = originalUrl.split('/')[2];
-  const svc = proxyMap[key];
+  const svc = ProxyMap[key];
   let url = originalUrl.replace('/proxy/', '').replace(key, svc);
   if (!url.startsWith('http://')) {
     url = `http://${url}`;
