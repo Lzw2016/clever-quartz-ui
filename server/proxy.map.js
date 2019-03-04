@@ -1,5 +1,5 @@
 const ProxyMap = {
-  quartz: 'http://192.168.159.136:28082',
+  quartz: 'http://172.16.29.104:8882',
 };
 
 export { ProxyMap };
