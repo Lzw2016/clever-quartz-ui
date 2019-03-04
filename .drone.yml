@@ -63,7 +63,7 @@ steps:
         - echo "------------------< 拉取新镜像 >------------------"
         - docker pull 172.16.29.104:8850/nodejs-service/clever-quartz-ui-server:0.0.1-SNAPSHOT
         - echo "------------------< 运行新镜像 >------------------"
-        - docker run --name clever-quartz-ui-server -d -p 8082:8082 172.16.29.104:8850/nodejs-service/clever-quartz-ui-server:0.0.1-SNAPSHOT
+        - docker run --name clever-quartz-ui-server -d -p 8883:8883 172.16.29.104:8850/nodejs-service/clever-quartz-ui-server:0.0.1-SNAPSHOT
         - exit
 
   - name: 发送通知[Email]
