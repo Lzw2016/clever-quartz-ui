@@ -46,7 +46,7 @@ steps:
   - name: 启动容器[SSH-Docker]
     image: appleboy/drone-ssh
     settings:
-      host: 192.168.159.136
+      host: 172.17.0.1
       port: 22
       username:
         from_secret: SshUsername
