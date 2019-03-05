@@ -72,7 +72,7 @@ steps:
     # detach: true
     settings:
       host: smtp.163.com
-      port: 25
+      port: 465
       username:
         from_secret: EmailUsername
       password:
