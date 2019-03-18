@@ -39,8 +39,7 @@ export default {
       yield put({ type: 'save', payload: { jobKeyNameList } });
     },
     *findByPage({ payload }, { select, call, put }) {
-      let queryParam = yield select(state => state.JobLogModel.queryParam);
-      let pagination = yield select(state => state.JobLogModel.pagination);
+      let { queryParam, pagination } = yield select(state => state.JobLogModel);
       queryParam = { ...queryParam, ...payload }
       // 请求数据
       const resultData = yield call(findJobLogByPage, queryParam);
